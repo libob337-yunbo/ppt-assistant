@@ -6,16 +6,20 @@ app = Flask(__name__)
 def home():
     return "PPT Assistant Server Running"
 
-@app.route("/ppt_task", methods=["POST"])
-def ppt_task():
+@app.route("/webhook", methods=["POST"])
+def webhook():
     data = request.json
-    instruction = data.get("instruction")
 
-    result = f"PPT任务已收到: {instruction}"
+    # 飞书验证 challenge
+    if "challenge" in data:
+        return jsonify({
+            "challenge": data["challenge"]
+        })
+
+    print("收到飞书消息:", data)
 
     return jsonify({
-        "status": "success",
-        "result": result
+        "status": "ok"
     })
 
 if __name__ == "__main__":
