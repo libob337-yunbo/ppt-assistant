@@ -7,6 +7,8 @@ app = Flask(__name__)
 FEISHU_APP_ID = os.environ.get("FEISHU_APP_ID")
 FEISHU_APP_SECRET = os.environ.get("FEISHU_APP_SECRET")
 
+print("APP_ID:", FEISHU_APP_ID)
+print("APP_SECRET:", FEISHU_APP_SECRET)
 def get_tenant_token():
     url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
     res = requests.post(url,json={
