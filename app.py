@@ -15,7 +15,9 @@ def get_tenant_token():
         "app_id": FEISHU_APP_ID,
         "app_secret": FEISHU_APP_SECRET
     })
-    return res.json()["tenant_access_token"]
+   data = res.json()
+print("FEISHU RESPONSE:", data)
+return data.get("tenant_access_token")
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
