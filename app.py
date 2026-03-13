@@ -9,15 +9,21 @@ FEISHU_APP_SECRET = os.environ.get("FEISHU_APP_SECRET")
 
 print("APP_ID:", FEISHU_APP_ID)
 print("APP_SECRET:", FEISHU_APP_SECRET)
+
+
 def get_tenant_token():
     url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
-    res = requests.post(url,json={
+
+    res = requests.post(url, json={
         "app_id": FEISHU_APP_ID,
         "app_secret": FEISHU_APP_SECRET
     })
-   data = res.json()
-print("FEISHU RESPONSE:", data)
-return data.get("tenant_access_token")
+
+    data = res.json()
+    print("FEISHU RESPONSE:", data)
+
+    return data.get("tenant_access_token")
+
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -46,13 +52,15 @@ def webhook():
         "content": "{\"text\":\"你好，我是PPT助手 🤖\"}"
     }
 
-    requests.post(url, headers=headers, json=body, params={"receive_id_type":"chat_id"})
+    requests.post(url, headers=headers, json=body, params={"receive_id_type": "chat_id"})
 
     return "ok"
+
 
 @app.route("/")
 def home():
     return "PPT Assistant Running"
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
