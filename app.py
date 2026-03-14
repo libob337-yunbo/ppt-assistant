@@ -4,6 +4,7 @@ import os
 import json
 
 app = Flask(__name__)
+print("BOT VERSION 2")
 
 FEISHU_APP_ID = os.environ.get("FEISHU_APP_ID")
 FEISHU_APP_SECRET = os.environ.get("FEISHU_APP_SECRET")
